@@ -1,7 +1,7 @@
 // External Dependencies (Node core or third-party modules)
 var express = require( "express" ),
     path    = require( "path" ),
-    body-parser = require( "body-parser" );
+    bodyParser = require( "body-parser" );
 
 // Internal Dependencies (Modules written for this app)
 var env = require( "./environment" );
@@ -12,16 +12,17 @@ var http = express();
 // Conceal the fact we're using nodejs
 http.disable( "x-powered-by" );
 
-// Hook up the public directory for static pathing,
+// Set up middleware to hook up the public directory for static pathing,
 // making content in the "public" directory available from
-// the root of the server (localhost/etc)
+// the root of the server
 http.use( express.static( path.join( __dirname, "public" ) ) );
 
-http.use( body-parser() );
+// Set up middleware to parse request bodies for us.
+http.use( bodyParser.json() );
 
 // Route declaration
-http.post( "/", function(req, res) {
-  res.send(200, "This is your web server working!");
+http.get( "/example", function(req, res) {
+  res.status( 200 ).send( "This is your web server working!" );
 });
 
 // Start the server

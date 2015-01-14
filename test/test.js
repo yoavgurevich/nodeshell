@@ -78,6 +78,7 @@ function apiHelper( verb, uri, httpCode, data, callback, customAssertions ) {
  * Unit tests
  */
 
+// Name of the functionality being tested goes here
 describe( "Name of the functionality being tested goes here", function() {
   // Logic to run before each test
   before( function( done ) {
