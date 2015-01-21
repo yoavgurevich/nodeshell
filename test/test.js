@@ -1,4 +1,5 @@
 var assert = require( "assert" ),
+    expect = require("chai").expect,
     fork = require( "child_process" ).fork,
     request = require( "request" ),
     now = Date.now(),
@@ -79,7 +80,7 @@ function apiHelper( verb, uri, httpCode, data, callback, customAssertions ) {
  */
 
 // Name of the functionality being tested goes here
-describe( "Name of the functionality being tested goes here", function() {
+describe( "The nodeshell's host route ", function() {
   // Logic to run before each test
   before( function( done ) {
     startServer( done );
@@ -94,5 +95,27 @@ describe( "Name of the functionality being tested goes here", function() {
   it( 'should return 200 when the root is queried with a get request', function ( done ) {
     apiHelper( 'get', host, 200, done );
   });
+
+  it( 'should return 404 when the root is queried with a post request', function ( done ) {
+    apiHelper( 'post', host, 404, done );
+  });
 });
 
+// describe( "The nodeshell's /tweet route ", function() {
+//   // Logic to run before each test
+//   before( function( done ) {
+//     startServer( done );
+//   });
+//
+//   // Logic to run after each test
+//   after( function( done ) {
+//     stopServer( done );
+//   });
+//
+//   // Example test block
+//   it( 'should return 200 when the root is queried with a post request', function ( done ) {
+//     apiHelper( 'post', host, 200, function(err, res, body, callback){
+//
+//     } );
+//   });
+// });

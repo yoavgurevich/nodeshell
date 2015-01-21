@@ -1,7 +1,14 @@
 body {
-  background-color: #1c86ed;
+  background-color: #000000;
+  color: #ffffff;
 }
 h1 {
   font-size: 38px;
-  color: #FFFFFF;
+  color: #555555;
+  font-family: arial;
+}
+h2 {
+  font-size: 20px;
+  color: #3f3f3f;
+  font-family: arial;
 }

@@ -16,12 +16,14 @@
     "habitat": "^1.1.0",
     "jquery": "^2.1.1",
     "request": "^2.34.0",
-    "twitter": "^0.2.9"
+    "twitter": "^1.0.3"
   },
   "devDependencies": {
+    "chai": "*",
     "grunt": "0.4.4",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-mocha-test": "^0.10.2",
-    "mocha": "1.18.2"
+    "mocha": "*",
+    "node-inspector": "^0.8.3"
   }
 }

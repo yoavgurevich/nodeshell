@@ -7,7 +7,7 @@ var express = require( "express" ),
 var env = require( "./environment" );
 
 // Instantiate the app
-var http = express();
+var http = module.exports = express();
 
 // Conceal the fact we're using nodejs
 http.disable( "x-powered-by" );
@@ -26,7 +26,7 @@ http.get( "/example", function(req, res) {
 });
 
 // Start the server
-http.listen( env.get( "PORT" ), function() {
+http.listen(env.get( "PORT" ), function() {
   console.log( "HTTP server listening on port " + env.get( "PORT" ) + "." );
 });
 
@@ -40,3 +40,5 @@ if ( process.send ) {
     process.exit(1);
   }
 }
+
+require('./server');
