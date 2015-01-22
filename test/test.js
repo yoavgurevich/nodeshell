@@ -1,11 +1,21 @@
 var assert = require( "assert" ),
     expect = require("chai").expect,
     fork = require( "child_process" ).fork,
+    uuid = require('uuid'),
+    Twitter = require('twitter'),
     request = require( "request" ),
     now = Date.now(),
     env = require( "../environment" ),
     child,
     host = env.get( "HOST" );
+
+/* Twitter API Setup */
+var client = new Twitter({
+  consumer_key: process.env.TWIT_CONSUMER_KEY,
+  consumer_secret: process.env.TWIT_CONSUMER_SECRET,
+  access_token_key: process.env.TWIT_ACCESS_KEY,
+  access_token_secret: process.env.TWIT_ACCESS_SECRET,
+});
 
 /**
  * Server functions
@@ -101,21 +111,39 @@ describe( "The nodeshell's host route ", function() {
   });
 });
 
-// describe( "The nodeshell's /tweet route ", function() {
-//   // Logic to run before each test
-//   before( function( done ) {
-//     startServer( done );
-//   });
-//
-//   // Logic to run after each test
-//   after( function( done ) {
-//     stopServer( done );
-//   });
-//
-//   // Example test block
-//   it( 'should return 200 when the root is queried with a post request', function ( done ) {
-//     apiHelper( 'post', host, 200, function(err, res, body, callback){
-//
-//     } );
-//   });
-// });
+describe( "The nodeshell's /tweet route", function() {
+  // Logic to run before each test
+  var uri = "http://localhost:2000/tweet";
+  var tid = "";
+
+  before(function(done) {
+    startServer( done );
+  });
+
+  // Logic to run after each test
+  after(function(done) {
+    var delRoute = 'statuses/destroy/' + tid + '.json';
+    client.post(delRoute, function(error, params, response){
+      if(error){
+        console.log(error);
+        throw error;
+      }
+
+      stopServer(done);
+    });
+  });
+
+  it( 'should return 200 when queried with a post request containing a valid tweet', function ( done ) {
+    this.timeout(7000);
+    var tweets = {
+      tweet: "test" + uuid.v4()
+    };
+
+    apiHelper('post', uri, 200, tweets, function(err, res, body){
+      expect(err).to.not.exist;
+      tid = body.id_str;
+
+      done();
+    });
+  });
+});

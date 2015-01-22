@@ -12,6 +12,7 @@ var client = new Twitter({
 http.post( "/tweet", function(req, res) {
   client.post('statuses/update', {status: req.body.tweet},  function(error, params, response){
     if(error){
+      console.log(error);
       throw error;
     }
 

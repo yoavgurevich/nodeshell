@@ -24,6 +24,7 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-mocha-test": "^0.10.2",
     "mocha": "*",
-    "node-inspector": "^0.8.3"
+    "node-inspector": "^0.8.3",
+    "uuid": "^2.0.1"
   }
 }

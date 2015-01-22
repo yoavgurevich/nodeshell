@@ -16,7 +16,7 @@ $(document).ready(function() {
         data: JSON.stringify(tweets)
       }).done(function() {
         $('#history').append('<li>' + tweets.tweet + '</li>');
-        return console.log('fuck you, it worked');
+        return console.log('upvotes for you precious, it worked');
       });
     }
   });
